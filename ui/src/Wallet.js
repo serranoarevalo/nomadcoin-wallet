@@ -1,9 +1,21 @@
-import React from "react";
+import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import styled, { keyframes } from "styled-components";
 
-export const Title = styled.h1`
+const Title = styled.h1`
   color: ${props => props.theme.titleColor};
+`;
+
+const Key = styled.h3`
+  color: ${props => props.theme.titleColor};
+  margin-bottom: 20px !important;
+  &:last-child {
+    margin-bottom: 0;
+  }
+`;
+
+const KeyName = styled.span`
+  color: #999;
 `;
 
 const Header = styled.div`
@@ -82,20 +94,41 @@ const Notification = styled.div`
   box-shadow: ${props => props.theme.boxShadow};
 `;
 
-const Wallet = ({ mining, mine, showingNotif }) => (
-  <Header>
-    {showingNotif && <Notification>You just mined a block!</Notification>}
-    <Title>Nomadcoin Wallet</Title>
-    <Button onClick={mine} disabled={mining}>
-      {mining ? "Mining..." : "Mine"}
-    </Button>
-  </Header>
+const Card = styled.div`
+  box-shadow: ${props => props.theme.boxShadow};
+  background-color: white;
+  width: 90%;
+  padding: 20px;
+  box-sizing: border-box;
+  border-radius: 10px;
+`;
+
+const Wallet = ({ mining, mine, showingNotif, address, balance }) => (
+  <Fragment>
+    <Header>
+      {showingNotif && <Notification>You just mined a block!</Notification>}
+      <Title>Nomadcoin Wallet</Title>
+      <Button onClick={mine} disabled={mining}>
+        {mining ? "Mining..." : "Mine"}
+      </Button>
+    </Header>
+    <Card>
+      <Key>
+        <KeyName>Your address:</KeyName> {address}
+      </Key>
+      <Key>
+        <KeyName>Your balance:</KeyName> {balance}
+      </Key>
+    </Card>
+  </Fragment>
 );
 
 Wallet.propTypes = {
   mining: PropTypes.bool.isRequired,
   mine: PropTypes.func.isRequired,
-  showingNotif: PropTypes.bool.isRequired
+  showingNotif: PropTypes.bool.isRequired,
+  address: PropTypes.number,
+  balance: PropTypes.number
 };
 
 export default Wallet;

@@ -4,7 +4,7 @@ import styled, { injectGlobal } from "styled-components";
 import reset from "styled-reset";
 import axios from "axios";
 import typography from "./typography";
-import Wallet, { Title } from "./Wallet";
+import Wallet from "./Wallet";
 
 const baseStyles = () => injectGlobal`
   ${reset};
@@ -29,6 +29,10 @@ const LoadingContainer = styled.div`
   height: 100%;
 `;
 
+const Title = styled.h1`
+  color: ${props => props.theme.titleColor};
+`;
+
 const Loading = () => (
   <LoadingContainer>
     <Title>Loading</Title>
@@ -49,6 +53,7 @@ class App extends Component {
     this.setState({
       isLoading: false
     });
+    setInterval(() => {}, 500);
   };
   render() {
     baseStyles();
