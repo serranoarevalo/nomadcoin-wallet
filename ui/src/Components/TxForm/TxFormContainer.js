@@ -10,7 +10,8 @@ class TxFormContainer extends Component {
   state = {
     port: window.sharedPort,
     address: "",
-    amount: ""
+    amount: "",
+    hasNotif: false
   };
   render() {
     return (
@@ -28,10 +29,8 @@ class TxFormContainer extends Component {
   };
   _handleAddress = event => {
     const { target: { value } } = event;
-    console.log(value);
     this.setState({
-      address: value,
-      hasError: false
+      address: value
     });
   };
   _handleAmount = event => {
@@ -41,19 +40,45 @@ class TxFormContainer extends Component {
     this.setState({
       amount: nValue,
       hasError: nValue > balance,
-      error: `You can't send ${nValue} if you only have ${balance} NMD in your account`
+      error:
+        nValue > balance
+          ? `You can't send ${nValue} NMD if you only have ${balance} NMD in your account`
+          : " "
     });
   };
   _submitForm = async () => {
     const { balance } = this.props;
     const { port, amount, address } = this.state;
-    if (amount <= balance) {
-      //   const request = await axios.post(`http://localhost:${port}/transaction`, {
-      //     method: "POST",
-      //     body: JSON.stringify({ address, amount }),
-      //     headers: { "Content-Type": "application/json" }
-      //   });
-      console.log(amount, address);
+    this.setState({
+      hasNotif: false,
+      successNotif: false,
+      dangerNotif: false
+    });
+    if (amount && address) {
+      if (amount <= balance) {
+        try {
+          const request = await axios.post(
+            `http://localhost:${port}/transactions`,
+            { address, amount },
+            {
+              headers: {
+                "Content-Type": "application/json"
+              }
+            }
+          );
+          this.setState({
+            address: "",
+            amount: "",
+            successNotif: true,
+            hasNotif: true
+          });
+        } catch (e) {
+          this.setState({
+            dangerNotif: true,
+            hasNotif: true
+          });
+        }
+      }
     }
   };
 }

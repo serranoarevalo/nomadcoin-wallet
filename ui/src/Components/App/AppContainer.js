@@ -23,11 +23,13 @@ class AppContainer extends Component {
   componentDidMount = () => {
     const { port } = this.state;
     this._getAddress(port);
-    this._getBalanace(port);
+    this._getBalance(port);
     this.setState({
       isLoading: false
     });
-    setInterval(() => {}, 500);
+    setInterval(() => {
+      this._getBalance(port);
+    }, 500);
   };
   render() {
     baseStyles();
@@ -40,7 +42,7 @@ class AppContainer extends Component {
       address
     });
   };
-  _getBalanace = async port => {
+  _getBalance = async port => {
     const request = await axios.get(`http://localhost:${port}/me/balance`);
     const { balance } = request.data;
     this.setState({

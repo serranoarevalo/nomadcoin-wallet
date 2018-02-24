@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { Card, Key, Button } from "Components/Shared";
+import { Card, Key, Button, Notification } from "Components/Shared";
 
 const SendTxForm = styled.form`
   margin-top: 25px;
@@ -33,6 +33,13 @@ const Input = Submit.extend`
   border-color: ${props => (props.hasError ? "#e74c3c" : "inherit")};
 `;
 
+const ErrorText = styled.span`
+  margin: 10px 0;
+  color: #e74c3c;
+  font-weight: 600;
+  display: block;
+`;
+
 const TxFormPresenter = ({
   handleSubmit,
   address,
@@ -40,7 +47,10 @@ const TxFormPresenter = ({
   handleAmount,
   handleAddress,
   hasError,
-  error
+  error,
+  hasNotif,
+  dangerNotif,
+  successNotif
 }) => (
   <Card>
     <Key>Send NMD: </Key>
@@ -62,8 +72,26 @@ const TxFormPresenter = ({
         onChange={handleAmount}
         hasError={hasError}
       />
-      <Submit value={"Send"} type={"submit"} readOnly disabled={hasError} />
+      <Submit
+        value={"Send"}
+        type={"submit"}
+        readOnly
+        disabled={hasError || (!address || !amount)}
+      />
     </SendTxForm>
+    <ErrorText>{error}</ErrorText>
+    {hasNotif &&
+      dangerNotif && (
+        <Notification>
+          Something wrong with the transaction, check and try again
+        </Notification>
+      )}
+    {hasNotif &&
+      successNotif && (
+        <Notification success>
+          Transaction added to pool, waiting for confirmation!
+        </Notification>
+      )}
   </Card>
 );
 

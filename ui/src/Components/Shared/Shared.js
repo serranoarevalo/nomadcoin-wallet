@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 export const Card = styled.div`
   box-shadow: ${props => props.theme.boxShadow};
@@ -62,4 +62,34 @@ export const Button = styled.button`
       transform: none;
     }
   }
+`;
+
+const notifAnim = keyframes`
+  0%{
+    opacity:0;
+    transform:translateX(-10px);
+  }
+  10%{
+    opacity:1;
+    transform:none;
+  }
+  90%{
+      opacity:1
+  }
+  100%{
+      opacity:0;
+  }
+`;
+
+export const Notification = styled.div`
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background-color: ${props => (props.success ? "#2ecc71" : "#e74c3c")};
+  color: white;
+  font-weight: 600;
+  padding: 10px;
+  border-radius: 5px;
+  animation: ${notifAnim} 2s linear forwards;
+  box-shadow: ${props => props.theme.boxShadow};
 `;
