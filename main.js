@@ -1,5 +1,15 @@
 const electron = require("electron");
 const node = require("./node/src/server");
+const getPort = require("get-port");
+
+getPort().then(port => {
+  node.app.listen(port, () => {
+    // eslint-disable-next-line
+    console.log(`Nomad Coin Node Running on port ${port} ✅`);
+    global.sharedPort = port;
+  });
+});
+
 // Module to control application life.
 const app = electron.app;
 // Module to create native browser window.
@@ -17,7 +27,8 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
-    title: "Nomadcoin Wallet"
+    title: "Nomadcoin Wallet",
+    resizable: false
   });
 
   const ENV = process.env.ENV;
