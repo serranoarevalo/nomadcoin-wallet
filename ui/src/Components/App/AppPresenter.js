@@ -1,7 +1,8 @@
-import React from "react";
+import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import Wallet from "Components/Wallet";
+import TxForm from "Components/TxForm";
 
 const AppContainer = styled.div`
   background-color: #f2f6fa;
@@ -40,13 +41,16 @@ const AppPresenter = ({
     {isLoading ? (
       <Loading />
     ) : (
-      <Wallet
-        balance={balance}
-        address={address}
-        mine={mine}
-        showingNotif={showingNotif}
-        mining={mining}
-      />
+      <Fragment>
+        <Wallet
+          balance={balance}
+          address={address}
+          mine={mine}
+          showingNotif={showingNotif}
+          mining={mining}
+        />
+        <TxForm />
+      </Fragment>
     )}
   </AppContainer>
 );

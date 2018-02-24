@@ -1,22 +1,7 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import styled, { keyframes } from "styled-components";
-
-const Title = styled.h1`
-  color: ${props => props.theme.titleColor};
-`;
-
-const Key = styled.h3`
-  color: ${props => props.theme.titleColor};
-  margin-bottom: 20px !important;
-  &:last-child {
-    margin-bottom: 0;
-  }
-`;
-
-const KeyName = styled.span`
-  color: #999;
-`;
+import { Card, Key, KeyName, Title } from "Components/Shared";
 
 const Header = styled.div`
   margin: 50px 0;
@@ -94,23 +79,6 @@ const Notification = styled.div`
   box-shadow: ${props => props.theme.boxShadow};
 `;
 
-export const Card = styled.div`
-  box-shadow: ${props => props.theme.boxShadow};
-  background-color: white;
-  width: 90%;
-  padding: 20px;
-  box-sizing: border-box;
-  border-radius: 10px;
-`;
-
-const SendTxForm = styled.form`
-  margin-top: 40px;
-`;
-
-const Input = styled.input``;
-
-const Submit = styled.input``;
-
 const WalletPresenter = ({ mining, mine, showingNotif, address, balance }) => (
   <Fragment>
     <Header>
@@ -125,7 +93,7 @@ const WalletPresenter = ({ mining, mine, showingNotif, address, balance }) => (
         <KeyName>Your address:</KeyName> {address}
       </Key>
       <Key>
-        <KeyName>Your balance:</KeyName> {balance}
+        <KeyName>Your balance:</KeyName> {balance} NMD
       </Key>
     </Card>
   </Fragment>
