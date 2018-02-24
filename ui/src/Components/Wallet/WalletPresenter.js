@@ -94,7 +94,7 @@ const Notification = styled.div`
   box-shadow: ${props => props.theme.boxShadow};
 `;
 
-const Card = styled.div`
+export const Card = styled.div`
   box-shadow: ${props => props.theme.boxShadow};
   background-color: white;
   width: 90%;
@@ -103,7 +103,15 @@ const Card = styled.div`
   border-radius: 10px;
 `;
 
-const Wallet = ({ mining, mine, showingNotif, address, balance }) => (
+const SendTxForm = styled.form`
+  margin-top: 40px;
+`;
+
+const Input = styled.input``;
+
+const Submit = styled.input``;
+
+const WalletPresenter = ({ mining, mine, showingNotif, address, balance }) => (
   <Fragment>
     <Header>
       {showingNotif && <Notification>You just mined a block!</Notification>}
@@ -123,12 +131,12 @@ const Wallet = ({ mining, mine, showingNotif, address, balance }) => (
   </Fragment>
 );
 
-Wallet.propTypes = {
+WalletPresenter.propTypes = {
   mining: PropTypes.bool.isRequired,
   mine: PropTypes.func.isRequired,
   showingNotif: PropTypes.bool.isRequired,
-  address: PropTypes.number,
-  balance: PropTypes.number
+  address: PropTypes.string.isRequired,
+  balance: PropTypes.number.isRequired
 };
 
-export default Wallet;
+export default WalletPresenter;

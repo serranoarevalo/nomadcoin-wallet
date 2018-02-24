@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
-import styled, { injectGlobal } from "styled-components";
+import { injectGlobal } from "styled-components";
 import reset from "styled-reset";
 import axios from "axios";
-import typography from "./typography";
-import Wallet from "./Wallet";
+import typography from "../../typography";
+import AppPresenter from "./AppPresenter";
 
 const baseStyles = () => injectGlobal`
   ${reset};
@@ -14,32 +13,7 @@ const baseStyles = () => injectGlobal`
   }
 `;
 
-const AppContainer = styled.div`
-  background-color: #f2f6fa;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-`;
-
-const LoadingContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-`;
-
-const Title = styled.h1`
-  color: ${props => props.theme.titleColor};
-`;
-
-const Loading = () => (
-  <LoadingContainer>
-    <Title>Loading</Title>
-  </LoadingContainer>
-);
-
-class App extends Component {
+class AppContainer extends Component {
   state = {
     isLoading: true,
     port: window.sharedPort,
@@ -57,12 +31,7 @@ class App extends Component {
   };
   render() {
     baseStyles();
-    const { isLoading } = this.state;
-    return (
-      <AppContainer>
-        {isLoading ? <Loading /> : <Wallet {...this.state} mine={this._mine} />}
-      </AppContainer>
-    );
+    return <AppPresenter {...this.state} mine={this._mine} />;
   }
   _getAddress = async port => {
     const request = await axios.get(`http://localhost:${port}/me/address`);
@@ -84,7 +53,7 @@ class App extends Component {
       mining: true,
       showingNotif: false
     });
-    const request = await axios.post(`http://localhost:${port}/mine`);
+    await axios.post(`http://localhost:${port}/mine`);
     this.setState({
       mining: false,
       showingNotif: true
@@ -92,4 +61,4 @@ class App extends Component {
   };
 }
 
-export default App;
+export default AppContainer;
