@@ -49,7 +49,7 @@ const AppPresenter = ({
           showingNotif={showingNotif}
           mining={mining}
         />
-        <TxForm />
+        <TxForm balance={balance} />
       </Fragment>
     )}
   </AppContainer>
