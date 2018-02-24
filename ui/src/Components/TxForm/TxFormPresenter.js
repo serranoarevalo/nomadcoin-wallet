@@ -29,13 +29,16 @@ const Input = Submit.extend`
   &:active {
     background-color: transparent;
   }
+  color: ${props => (props.hasError ? "#e74c3c" : "inherit")};
+  border-color: ${props => (props.hasError ? "#e74c3c" : "inherit")};
 `;
 
 const TxFormPresenter = ({
   handleSubmit,
-  balance,
+  address,
   amount,
-  handleInput,
+  handleAmount,
+  handleAddress,
   hasError,
   error
 }) => (
@@ -46,26 +49,28 @@ const TxFormPresenter = ({
         placeholder={"Address"}
         required
         name="address"
-        value={balance}
-        onChange={handleInput}
+        value={address}
+        type={"text"}
+        onChange={handleAddress}
       />
       <Input
         placeholder={"Amount"}
         required
         name="amount"
         type={"number"}
-        min={0}
-        value={amount}
-        onChange={handleInput}
+        value={amount || ""}
+        onChange={handleAmount}
+        hasError={hasError}
       />
-      <Submit value={"Send"} type={"Submit"} readOnly disabled={hasError} />
+      <Submit value={"Send"} type={"submit"} readOnly disabled={hasError} />
     </SendTxForm>
   </Card>
 );
 
 TxFormPresenter.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
-  handleInput: PropTypes.func.isRequired,
+  handleAmount: PropTypes.func.isRequired,
+  handleAddress: PropTypes.func.isRequired,
   hasError: PropTypes.bool,
   error: PropTypes.string
 };

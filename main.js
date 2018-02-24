@@ -1,9 +1,9 @@
 const electron = require("electron");
-const node = require("./node/src/server");
+const chainNode = require("./chain-node/src/server");
 const getPort = require("get-port");
 
 getPort().then(port => {
-  node.app.listen(port, () => {
+  chainNode.app.listen(port, () => {
     // eslint-disable-next-line
     console.log(`Nomad Coin Node Running on port ${port} ✅`);
     global.sharedPort = port;
