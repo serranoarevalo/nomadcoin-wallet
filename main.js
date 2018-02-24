@@ -23,7 +23,7 @@ function createWindow() {
   const ENV = process.env.ENV;
 
   if (ENV === "dev") {
-    mainWindow.loadURL("http://localhost:3001");
+    mainWindow.loadURL("http://localhost:3000");
   } else {
     // and load the index.html of the app.
     mainWindow.loadURL(
