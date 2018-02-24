@@ -39,7 +39,8 @@ class App extends Component {
   state = {
     isLoading: true,
     port: window.sharedPort,
-    mining: false
+    mining: false,
+    showingNotif: false
   };
   componentDidMount = () => {
     const { port } = this.state;
@@ -75,11 +76,13 @@ class App extends Component {
   _mine = async () => {
     const { port } = this.state;
     this.setState({
-      mining: true
+      mining: true,
+      showingNotif: false
     });
     const request = await axios.post(`http://localhost:${port}/mine`);
     this.setState({
-      mining: false
+      mining: false,
+      showingNotif: true
     });
   };
 }

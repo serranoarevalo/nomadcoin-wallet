@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 export const Title = styled.h1`
   color: ${props => props.theme.titleColor};
@@ -52,8 +52,39 @@ const Button = styled.button`
   }
 `;
 
-const Wallet = ({ mining, mine }) => (
+const notifAnim = keyframes`
+  0%{
+    opacity:0;
+    transform:translateX(-10px);
+  }
+  10%{
+    opacity:1;
+    transform:none;
+  }
+  90%{
+      opacity:1
+  }
+  100%{
+      opacity:0;
+  }
+`;
+
+const Notification = styled.div`
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background-color: #2ecc71;
+  color: white;
+  font-weight: 600;
+  padding: 10px;
+  border-radius: 5px;
+  animation: ${notifAnim} 2s linear forwards;
+  box-shadow: ${props => props.theme.boxShadow};
+`;
+
+const Wallet = ({ mining, mine, showingNotif }) => (
   <Header>
+    {showingNotif && <Notification>You just mined a block!</Notification>}
     <Title>Nomadcoin Wallet</Title>
     <Button onClick={mine} disabled={mining}>
       {mining ? "Mining..." : "Mine"}
@@ -63,7 +94,8 @@ const Wallet = ({ mining, mine }) => (
 
 Wallet.propTypes = {
   mining: PropTypes.bool.isRequired,
-  mine: PropTypes.func.isRequired
+  mine: PropTypes.func.isRequired,
+  showingNotif: PropTypes.bool.isRequired
 };
 
 export default Wallet;
