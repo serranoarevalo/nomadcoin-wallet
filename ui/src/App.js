@@ -72,9 +72,14 @@ class App extends Component {
       balance
     });
   };
-  _mine = () => {
+  _mine = async () => {
+    const { port } = this.state;
     this.setState({
       mining: true
+    });
+    const request = await axios.post(`http://localhost:${port}/mine`);
+    this.setState({
+      mining: false
     });
   };
 }
