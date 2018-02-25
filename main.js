@@ -39,7 +39,7 @@ function createWindow() {
     // and load the index.html of the app.
     mainWindow.loadURL(
       url.format({
-        pathname: path.join(__dirname, "ui/build/index.html"),
+        pathname: path.join(__dirname, "wallet/index.html"),
         protocol: "file:",
         slashes: true
       })

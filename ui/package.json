@@ -16,7 +16,7 @@
   "homepage": "./",
   "scripts": {
     "start": "BROWSER=none react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && mv build ../wallet",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }
