@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "description": "Wallet Desktop App for the Nomadcoin blockchain",
   "main": "main.js",
+  "productName": "Nomadcoin Wallet",
   "scripts": {
-    "start": "ENV=dev electron ."
+    "start": "ENV=dev electron .",
+    "build": "electron-packager ."
   },
   "repository": "https://github.com/serranoarevalo/nomadcoin-wallet",
   "author": "Nicolás Serrano Arévalo <itnico.las.me@gmail.com>",

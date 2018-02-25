@@ -49,16 +49,17 @@ class AppContainer extends Component {
       balance
     });
   };
-  _mine = async () => {
+  _mine = () => {
     const { port } = this.state;
     this.setState({
       mining: true,
       showingNotif: false
     });
-    await axios.post(`http://localhost:${port}/mine`);
-    this.setState({
-      mining: false,
-      showingNotif: true
+    axios.post(`http://localhost:${port}/mine`).then(response => {
+      this.setState({
+        mining: false,
+        showingNotif: true
+      });
     });
   };
 }

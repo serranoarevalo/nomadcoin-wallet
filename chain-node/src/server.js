@@ -25,7 +25,7 @@ const { connectToPeers, startP2PServer } = P2P;
 const { initWallet, getPublicFromWallet } = Wallet;
 const { getMemPool } = MemPool;
 
-const MASTER_NODE = "http://localhost:64980";
+const MASTER_NODE = "https://nomadcoin.now.sh";
 
 const app = express();
 
