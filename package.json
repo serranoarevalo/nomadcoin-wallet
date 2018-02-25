@@ -6,10 +6,8 @@
   "productName": "Nomadcoin Wallet",
   "scripts": {
     "start": "ENV=dev electron .",
-    "build":
-      "electron-packager . --icon=coin.icns --prune=true --ignore=ui --overwrite --out=dist",
-    "prebuild":
-      "rm -rf wallet && cd ui && yarn build && cd .. && sips -z 512 512 coin.png && sips -s format icns coin.png --out coin.icns && rm -rf chain-node/src/privateKey"
+    "build": "electron-packager . --icon=coin.icns --prune=true --ignore=/ui --overwrite --out=dist",
+    "prebuild": "rm -rf wallet && cd ui && yarn build && cd .. && sips -z 512 512 coin.png && sips -s format icns coin.png --out coin.icns && rm -rf chain-node/src/privateKey"
   },
   "repository": "https://github.com/serranoarevalo/nomadcoin-wallet",
   "author": "Nicolás Serrano Arévalo <itnico.las.me@gmail.com>",

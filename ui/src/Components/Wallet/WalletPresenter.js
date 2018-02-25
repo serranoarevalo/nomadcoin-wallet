@@ -9,6 +9,7 @@ import {
   Button,
   Notification
 } from "Components/Shared";
+const { clipboard } = window.require("electron");
 
 const Header = styled.div`
   margin: 50px 0;
@@ -16,6 +17,13 @@ const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+`;
+
+const Input = Key.withComponent("textarea").extend`
+  appearance:none;
+  border:0;
+  font:inherit;
+  width:100%;
 `;
 
 const WalletPresenter = ({ mining, mine, showingNotif, address, balance }) => (
@@ -31,7 +39,8 @@ const WalletPresenter = ({ mining, mine, showingNotif, address, balance }) => (
     </Header>
     <Card>
       <Key>
-        <KeyName>Your address:</KeyName> {address}
+        <KeyName>Your address:</KeyName>{" "}
+        <Input readOnly={true} value={address} />
       </Key>
       <Key>
         <KeyName>Your balance:</KeyName> {balance} NMD

@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { ThemeProvider } from "styled-components";
 import App from "./Components/App";
-import { remote } from "electron";
+const { remote } = window.require("electron");
 
 const sharedPort = remote.getGlobal("sharedPort");
 window.sharedPort = sharedPort;
