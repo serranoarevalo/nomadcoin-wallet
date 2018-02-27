@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import {
   Card,
   Key,
@@ -9,7 +9,6 @@ import {
   Button,
   Notification
 } from "Components/Shared";
-const { clipboard } = window.require("electron");
 
 const Header = styled.div`
   margin: 50px 0;

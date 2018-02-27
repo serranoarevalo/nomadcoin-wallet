@@ -57,7 +57,7 @@ class TxFormContainer extends Component {
     if (amount && address) {
       if (amount <= balance) {
         try {
-          const request = await axios.post(
+          await axios.post(
             `http://localhost:${port}/transactions`,
             { address, amount },
             {
