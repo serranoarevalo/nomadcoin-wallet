@@ -1,0 +1,2 @@
+dist/Nomadcoin[[:space:]]Wallet-darwin-x64 filter=lfs diff=lfs merge=lfs -text
+dist/Nomadcoin[[:space:]]Wallet-darwin-x64/Nomadcoin[[:space:]]Wallet.zip filter=lfs diff=lfs merge=lfs -text
